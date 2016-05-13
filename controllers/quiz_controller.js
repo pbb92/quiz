@@ -16,7 +16,15 @@ exports.load = function(req, res, next, quizId) {
 
 // GET /quizzes
 exports.index = function(req, res, next) {
-	var s;
+	if(req.params.format === "json"){
+
+		models.Quiz.findAll()
+		.then(function(quizzes) {
+			res.send(quizzes);
+		})
+
+	} else {
+		var s = "%%";
 	if(typeof req.query.search != 'undefined'){
 		s = '%' + req.query.search.replace(' ', '%') + '%';
 	}
@@ -25,13 +33,23 @@ exports.index = function(req, res, next) {
 		res.render('quizzes/index.ejs', { quizzes: quizzes});
 	})
 	.catch(function(error) { next(error); });
+	}
 };
 
 // GET /quizzes/:id
 exports.show = function(req, res, next) {
+	if(req.params.format === "json"){
+
+		models.Quiz.findAll()
+		.then(function(quizzes) {
+			res.send(quizzes[req.params.quizId-1]);
+		})
+
+	} else {
 		var answer = req.query.answer || '';
 		res.render('quizzes/show', {quiz: req.quiz,
 								    answer: answer});
+	}
 };
 
 
