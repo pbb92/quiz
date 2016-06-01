@@ -33,4 +33,4 @@ Quiz.hasMany(Comment);
 
 exports.Quiz = Quiz; // exportar definición de tabla Quiz
 exports.Comment = Comment; // exportar definicion de tabla comments
-exportar.User = User; // exportar definicion de tabal Users
+exports.User = User; // exportar definicion de tabal Users
