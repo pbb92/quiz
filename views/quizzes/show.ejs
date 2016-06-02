@@ -4,6 +4,12 @@
 	      Pregunta: <%= quiz.question %>
 	    </p>
 
+      <% if (quiz.Attachment) { %>
+          <img src="<%= quiz.Attachment.url %>" />
+       <% } else { %> 
+          <img src="/imgs/question.png" width="50px" />
+       <% } %> 
+
 	    <p>
 	      <input type="text" name="answer" value="<%= answer %>" placeholder="Responda aquí"/>
 	      <input type="submit" value="Comprobar">
