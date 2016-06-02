@@ -35,6 +35,25 @@ app.use(flash());
 
 app.use(function(req, res, next) {
 
+ if(req.session.user){
+    var x = new Date().getTime();
+    var y = req.session.user.autologout;
+    y = y + 120000;
+    if( x > y){
+          delete req.session.user;
+          next();
+        }else{
+          var caducasession = new Date().getTime();
+          req.session.user.autologout = caducasession;
+          next();
+        }
+  }else{
+    next();
+  }
+});
+
+app.use(function(req, res, next) {
+
   // Hacer invisible req.session en las vistas
   res.locals.session = req.session;
 
@@ -73,6 +92,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
 
 
 module.exports = app;

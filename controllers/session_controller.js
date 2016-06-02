@@ -49,7 +49,8 @@ exports.create = function(req, res, next) {
             if (user) {
     	        // Crear req.session.user y guardar campos id y username
     	        // La sesión se define por la existencia de: req.session.user
-    	        req.session.user = {id:user.id, username:user.username};
+    	        var caducasession = new Date().getTime();
+    	        req.session.user = {id:user.id, username:user.username, autologout:caducasession };
 
                 res.redirect(redir); // redirección a redir
             } else {
