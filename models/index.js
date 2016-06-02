@@ -35,6 +35,10 @@ Quiz.hasMany(Comment);
 User.hasMany(Quiz, {foreignKey: 'AuthorId'});
 Quiz.belongsTo(User, {as: 'Author', foreignKey: 'AuthorId'});
 
+// realcion 1 a N entre user y quiz
+User.hasMany(Comment, {foreignKey: 'AuthorI'});
+Comment.belongsTo(User, {as: 'Author', foreignKey: 'AuthorI'});
+
 exports.Quiz = Quiz; // exportar definición de tabla Quiz
 exports.Comment = Comment; // exportar definicion de tabla comments
 exports.User = User; // exportar definicion de tabal Users
